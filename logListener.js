@@ -24,12 +24,13 @@ function _die(m1, m2) {
 }
 
 var positive_re = /REST\.GET\.OBJECT ping\.json/;
-var negative_re = /aws\-internal/;
+var negative_re1 = /aws\-internal/;
+var negative_re2 = /aws\-sdk-nodejs/;
 function _of_interest_p(str) {
     var ret = false;
 
     //_ll('TEST: ' + test);
-    if (positive_re.test(str) && !negative_re.test(str)) {
+    if (positive_re.test(str) && !negative_re1.test(str) && !negative_re2.test(str)) {
         ret = true;
     }
 
@@ -117,15 +118,19 @@ s3.listObjects(function (err, data) {
                                 //console.log(date_matches);
                                 var ip = ip_matches[0];
                                 var date = date_matches[1];
-                                var option = option_matches ? option_matches[0] : "None";
-                                if(option.endsWith(" HTTP")){
-                                    option = option.substr(0,option.length - 5);
-                                }
-                                if(option.startsWith("?")){
-                                    option = option.substr(1);
-                                }
-
-                                console.log([ip, date, option].join("\t"));
+                                var option = option_matches ? option_matches[0] : "";
+								var option_array = "";
+								if(option){
+									if(option.endsWith(" HTTP")){
+										option = option.substr(0,option.length - 5);
+									}
+									if(option.startsWith("?")){
+										option = option.substr(1);
+									}
+									var option_array = option.split('\&')
+									option = option_array.join("\t");
+								}
+								console.log([ip, date, option].join("\t"));
                             }
                         });
                     }
