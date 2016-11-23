@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-	    "test": "ava",
-		  "lint": "standard",
-		    "dev": "chokidar '**/*.js' -c 'standard && ava'"
+    "test": "ava",
+    "lint": "standard",
+    "dev": "chokidar '**/*.js' -c 'standard && ava'"
   },
-  "pre-commit": ["test", "lint"],
+  "pre-commit": [
+    "test",
+    "lint"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -16,5 +19,11 @@
     "ava": "^0.17.0",
     "chokidar-cli": "^1.2.0",
     "standard": "^8.5.0"
+  },
+  "dependencies":{
+    "aws-sdk": "2.0.4",
+    "minimist": "0.2.0",
+    "underscore": "1.8.3",
+    "yamljs": "0.2.3"
   }
 }
